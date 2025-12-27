@@ -1,6 +1,6 @@
 # SIPATE - Sistem Pakar Penyakit Tebu
 
-SIPATE adalah aplikasi web untuk membantu petani dan pengguna dalam mendiagnosa penyakit tanaman tebu berdasarkan gejala yang muncul. Sistem ini menggunakan pendekatan berbasis aturan (rule-based) untuk diagnosis dan rekomendasi penanganan.
+SIPATE adalah aplikasi web untuk membantu petani dan pengguna dalam mendiagnosa penyakit tanaman tebu berdasarkan gejala yang muncul. Sistem ini menggunakan metode Forward Chaining untuk diagnosis dan rekomendasi penanganan.
 
 ## ✨ Fitur Utama
 
@@ -8,6 +8,15 @@ SIPATE adalah aplikasi web untuk membantu petani dan pengguna dalam mendiagnosa 
 - Manajemen data penyakit, gejala, aturan, dan riwayat konsultasi (admin)
 - Cetak hasil diagnosa ke PDF
 - Dashboard admin ringkasan data
+
+## 🧠 Metode Forward Chaining
+
+Alur kerja sistem pakar pada aplikasi SIPATE adalah sebagai berikut:
+1. Pengguna memilih gejala yang dialami tanaman tebu
+2. Gejala dianggap sebagai fakta awal
+3. Sistem mencocokkan fakta dengan aturan IF–THEN
+4. Sistem menarik kesimpulan berupa jenis penyakit
+5. Sistem menampilkan hasil diagnosa dan rekomendasi penanganan
 
 ## 🛠️ Teknologi
 
@@ -29,7 +38,7 @@ SIPATE adalah aplikasi web untuk membantu petani dan pengguna dalam mendiagnosa 
 ### 1. Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/TaufiqImanSetyanto/sistempakartebu
 cd sistempakartebu
 ```
 
@@ -54,7 +63,7 @@ npm install
   PORT=5000
   ```
 - Pastikan file konfigurasi database (`backend/config/db.js`) membaca dari variabel environment `MONGODB_URI`.
-- Jalankan seed data (opsional):
+- Jalankan seed data:
   ```bash
   node seed.js
   ```
@@ -81,14 +90,31 @@ Frontend akan berjalan di [http://localhost:5173](http://localhost:5173) (defaul
 ## 📁 Struktur Direktori
 
 ```
-backend/    # Backend Node.js/Express
-frontend/   # Frontend React
+.
+├── backend/
+│   ├── config/db.js         # Koneksi MongoDB
+│   ├── controllers/         # Logika Diagnosa & Admin
+│   ├── models/              # Skema (Disease, Symptom, Rule, Result)
+│   ├── routes/              # API Endpoints
+│   ├── seed.js              # Script data awal (Sangat Penting)
+│   └── server.js            # Entry point server
+└── frontend/
+    ├── src/
+    │   ├── api/             # Konfigurasi Axios (api.js, apiAdmin.js)
+    │   ├── components/      # UI Reusable (Admin & User)
+    │   ├── context/         # Auth Provider (AdminAuth.jsx)
+    │   └── pages/           # Halaman Utama & Dashboard Admin
+    └── vite.config.js       # Konfigurasi Build Vite
 ```
 
 ## 👤 Admin Default
 
 - Username: admin
 - Password: admin
+
+⚠️ Catatan
+
+Aplikasi SIPATE merupakan sistem pendukung keputusan dan bukan pengganti pakar pertanian secara langsung.
 
 ## 📄 Lisensi
 
