@@ -12,6 +12,7 @@ SIPATE adalah aplikasi web untuk membantu petani dan pengguna dalam mendiagnosa 
 ## 🧠 Metode Forward Chaining
 
 Alur kerja sistem pakar pada aplikasi SIPATE adalah sebagai berikut:
+
 1. Pengguna memilih gejala yang dialami tanaman tebu
 2. Gejala dianggap sebagai fakta awal
 3. Sistem mencocokkan fakta dengan aturan IF–THEN
@@ -92,19 +93,59 @@ Frontend akan berjalan di [http://localhost:5173](http://localhost:5173) (defaul
 ```
 .
 ├── backend/
-│   ├── config/db.js         # Koneksi MongoDB
-│   ├── controllers/         # Logika Diagnosa & Admin
-│   ├── models/              # Skema (Disease, Symptom, Rule, Result)
-│   ├── routes/              # API Endpoints
-│   ├── seed.js              # Script data awal (Sangat Penting)
-│   └── server.js            # Entry point server
+│   ├── config/
+│   │   └── db.js           
+│   ├── controllers/
+│   │   ├── adminController.js
+│   │   ├── authController.js
+│   │   └── diagnoseController.js
+│   ├── middleware/
+│   │   └── auth.js      
+│   ├── models/
+│   │   ├── admin.js
+│   │   ├── diseases.js
+│   │   ├── result.js
+│   │   ├── rules.js
+│   │   └── symptoms.js
+│   ├── routes/
+│   │   ├── adminRoutes.js
+│   │   ├── authRoutes.js
+│   │   └── diagnoseRoutes.js
+│   ├── seed.js           
+│   └── server.js         
 └── frontend/
-    ├── src/
-    │   ├── api/             # Konfigurasi Axios (api.js, apiAdmin.js)
-    │   ├── components/      # UI Reusable (Admin & User)
-    │   ├── context/         # Auth Provider (AdminAuth.jsx)
-    │   └── pages/           # Halaman Utama & Dashboard Admin
-    └── vite.config.js       # Konfigurasi Build Vite
+  ├── public/              
+  ├── src/
+  │   ├── api/
+  │   │   ├── api.js
+  │   │   └── apiAdmin.js
+  │   ├── components/
+  │   │   ├── DiseaseCard.jsx
+  │   │   ├── Footer.jsx
+  │   │   ├── Header.jsx
+  │   │   ├── SymptomCheckbox.jsx
+  │   │   └── admin/
+  │   │       ├── HeaderAdmin.jsx
+  │   │       ├── LayoutAdmin.jsx
+  │   │       └── SidebarAdmin.jsx
+  │   ├── context/
+  │   │   └── AdminAuth.jsx
+  │   └── pages/
+  │       ├── Diagnose.jsx
+  │       ├── Home.jsx
+  │       ├── Result.jsx
+  │       └── admin/
+  │           ├── Dashboard.jsx
+  │           ├── DataAturan.jsx
+  │           ├── DataGejala.jsx
+  │           ├── DataPenyakit.jsx
+  │           ├── Login.jsx
+  │           └── RekapKonsultasi.jsx
+  ├── index.css
+  ├── index.html
+  ├── vite.config.js       
+  ├── eslint.config.js    
+  └── package.json
 ```
 
 ## 👤 Admin Default
