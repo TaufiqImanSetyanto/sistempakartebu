@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+
 import Symptoms from "./models/symptoms.js";
 import Diseases from "./models/diseases.js";
 import Rules from "./models/rules.js";
+import Admin from "./models/admin.js";
 
 dotenv.config();
 await connectDB();
@@ -86,7 +88,9 @@ const seedAll = async () => {
     await Symptoms.deleteMany();
     await Diseases.deleteMany();
     await Rules.deleteMany();
+    await Admin.deleteMany();
 
+    // Seed symptoms & diseases
     const insertedSymptoms = await Symptoms.insertMany(symptomsData);
     const insertedDiseases = await Diseases.insertMany(diseasesData);
 
@@ -101,7 +105,13 @@ const seedAll = async () => {
 
     await Rules.insertMany(rulesData);
 
+    // Seed admin default
+    const adminUsername = "admin";
+    const adminPassword = "admin";
+    await Admin.create({ username: adminUsername, password: adminPassword });
+
     console.log("🌾 All collections seeded successfully with references!");
+    console.log(`👤 Admin default: username: ${adminUsername}, password: ${adminPassword}`);
     process.exit();
   } catch (error) {
     console.error("❌ Seeding failed:", error);
